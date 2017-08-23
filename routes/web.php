@@ -16,11 +16,11 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/v1/orders/total', [
-	'middleware' => 'auth',
+	'middleware' => 'jwt-auth',
 	'uses' => 'OrdersController@getTotalOrders'
 ]);
 
 $app->get('/v1/clients/last', [
-	'middleware' => 'auth',
+	'middleware' => 'jwt-auth',
 	'uses' => 'ClientsController@getLastClientsRegisters'
 ]);

@@ -2,22 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
 {
+    
     use Authenticatable, Authorizable;
 
-    /**
-     * The name table rewrite
-     *
-     * @var array
-     */
     protected $table = 'usuarios';
 
     /**
@@ -26,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'nome', 'email',
+        'name', 'email',
     ];
 
     /**
@@ -35,12 +31,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'senha',
+        'password',
     ];
 
-    public static function verifyToken($token)
+    public function getJWTIdentifier()
     {
-        return app('db')->select("SELECT * FROM usuarios WHERE token = ?", [$token]);
+        return $this->getKey();
     }
 
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public static function updateTokenByEmail($token, $email)
+    {
+        return User::where('email', $email)->update(['token' => $token]);
+    }
+    
 }
