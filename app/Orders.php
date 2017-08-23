@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
 {
@@ -23,9 +24,11 @@ class Orders extends Model
         'valor', 'data_venda',
     ];
 
-    public static function getCountValorOrders()
+    public static function getCountValorOrders($userId)
     {
-        return app('db')->select("SELECT COUNT(valor) FROM vendas WHERE usuario_id = ?", [$token]);
+        $valor = app('db')->select("SELECT SUM(valor) as total FROM vendas WHERE id_usuario = ?", [$userId]);
+
+        return 'R$ ' . number_format($valor[0]->total, 2, ',', '.');
     }
 
 }

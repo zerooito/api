@@ -19,3 +19,8 @@ $app->get('/v1/orders/total', [
 	'middleware' => 'auth',
 	'uses' => 'OrdersController@getTotalOrders'
 ]);
+
+$app->get('/v1/clients/last', [
+	'middleware' => 'auth',
+	'uses' => 'ClientsController@getLastClientsRegisters'
+]);
