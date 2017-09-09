@@ -24,3 +24,18 @@ $app->get('/v1/clients/last', [
 	'middleware' => 'jwt-auth',
 	'uses' => 'ClientsController@getLastClientsRegisters'
 ]);
+
+$app->get('/v1/clients/count', [
+	'middleware' => 'jwt-auth',
+	'uses' => 'ClientsController@getTotalCountClients'
+]);
+
+$app->get('/v1/products/count', [
+	'middleware' => 'jwt-auth',
+	'uses' => 'ProductsController@getCountRegistersProducts'
+]);
+
+$app->get('/v1/products/cust', [
+	'middleware' => 'jwt-auth',
+	'uses' => 'ProductsController@getCustTotalProducts'
+]);

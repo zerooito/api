@@ -29,5 +29,16 @@ class ClientsController extends Controller
         );
     }
 
+    public function getTotalCountClients(Request $request, JWTAuth $JWTAuth)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+        
+        $countTotalClients = Clients::getTotalCountRegisters($user->id);
+
+        return Response(
+            json_encode($countTotalClients)
+        );
+    }
+
 }
 

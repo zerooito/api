@@ -26,9 +26,33 @@ class Clients extends Model
 
     public static function getLastClientesRegisters($userId, $limit)
     {
-        $clients = app('db')->select("SELECT id, CONCAT(nome1, ' ', nome2) as nome FROM clientes WHERE id_usuario = ? ORDER BY id DESC LIMIT ?", [$userId, $limit]);
+        $query = "SELECT id, CONCAT(nome1, ' ', nome2) as nome 
+                  FROM clientes WHERE id_usuario = ? 
+                  ORDER BY id DESC LIMIT ?";
+
+        $clients = app('db')->select(
+            $query, 
+            [
+                $userId,
+                $limit
+            ]
+        );
 
         return $clients;
+    }
+
+    public static function getTotalCountRegisters($userId)
+    {
+        $query = "SELECT count(*) as count FROM clientes WHERE id_usuario = ?";
+
+        $count = app('db')->select(
+            $query, 
+            [
+                $userId
+            ]
+        );
+
+        return $count[0];
     }
 
 }
