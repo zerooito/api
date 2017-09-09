@@ -59,9 +59,9 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+	Vluzrmos\LumenCors\CorsMiddleware::class
+]);
 
 $app->routeMiddleware([
 	'jwt-auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
