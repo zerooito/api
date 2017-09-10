@@ -50,6 +50,7 @@ class Handler extends ExceptionHandler
                 json_encode(
                     [
                         'message' => 'Route not found',
+                        'details' => $e->getMessage(),
                         'code' => 404
                     ]
                 ), 
@@ -62,6 +63,7 @@ class Handler extends ExceptionHandler
                 json_encode(
                     [
                         'message' => 'Whoops, anything happened. Sorry!',
+                        'details' => $e->getMessage(),
                         'code' => 500
                     ]
                 ), 

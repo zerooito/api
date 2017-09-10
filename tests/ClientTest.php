@@ -28,10 +28,9 @@ class ClientTest extends TestCase
 	{
 	    $url = '/v1/clients/count';
 
-	    // Test unauthenticated access.
 	    $this->get(
 	    	$url,
-	    	$this->headers(\App\User::find(28))
+	    	$this->headers(\App\User::find(25))
 	    )->assertResponseStatus(200);
 	}
 

@@ -9,6 +9,8 @@ use Tymon\JWTAuth\JWTAuth;
 
 use App\Orders;
 
+use App\Helpers\Format;
+
 class OrdersController extends Controller
 {
 
@@ -21,5 +23,13 @@ class OrdersController extends Controller
         return Response(['total' => $ordersTotalValue], 200);
     }
 
-}
+    public function loadOrdersByPeriod(Request $request, JWTAuth $JWTAuth)
+    {
+    	$user = $JWTAuth->parseToken()->authenticate();
 
+    	$ordersPeriod = Orders::getLoadOrderByPeriod($user->id);
+
+    	return Response(Format::toChartDashboard($ordersPeriod), 200);
+    }
+    
+}

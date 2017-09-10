@@ -31,4 +31,18 @@ class Orders extends Model
         return 'R$ ' . number_format($valor[0]->total, 2, ',', '.');
     }
 
+    public static function getLoadOrderByPeriod($userId)
+    {
+        $query = "SELECT SUM(valor) as total, data_venda
+                  FROM vendas 
+                  WHERE id_usuario = ? 
+                  GROUP BY data_venda 
+                  ORDER BY data_venda DESC
+                  LIMIT 30";
+
+        $orders = app('db')->select($query, [$userId]);
+
+        return $orders;
+    }
+
 }

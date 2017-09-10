@@ -15,6 +15,11 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+$app->get('/v1/orders/load', [
+	'middleware' => 'jwt-auth',
+	'uses' => 'OrdersController@loadOrdersByPeriod'
+]);
+
 $app->get('/v1/orders/total', [
 	'middleware' => 'jwt-auth',
 	'uses' => 'OrdersController@getTotalOrders'
