@@ -1,6 +1,6 @@
 # reginaldojunior/dashboard
 
-[![Build Status](https://travis-ci.org/ciawn/dashboard.svg?branch=master)](https://travis-ci.org/ciawn/dashboard) [![Coverage Status](https://coveralls.io/repos/github/ciawn/dashboard/badge.svg?branch=master)](https://coveralls.io/github/ciawn/dashboard?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ciawn/dashboard/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ciawn/dashboard/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/ciawn/dashboard/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ciawn/dashboard/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/ciawn/dashboard/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ciawn/dashboard/build-status/master)
 
 ## License
 
