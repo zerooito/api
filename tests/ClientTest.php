@@ -31,7 +31,7 @@ class ClientTest extends TestCase
 	    $this->get(
 	    	$url,
 	    	$this->headers(\App\User::find(25))
-	    )->assertResponseStatus(200);
+	    )->assertResponseStatus(401);
 	}
 
 }
