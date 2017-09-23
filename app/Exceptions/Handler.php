@@ -45,32 +45,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-            return response(
-                json_encode(
-                    [
-                        'message' => 'Route not found',
-                        'details' => $e->getMessage(),
-                        'code' => 404
-                    ]
-                ), 
-                404
-            );
-        }
-
-        if ($e instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
-            return response(
-                json_encode(
-                    [
-                        'message' => 'Whoops, anything happened. Sorry!',
-                        'details' => $e->getMessage(),
-                        'code' => 500
-                    ]
-                ), 
-                500
-            );
-        }
-
         return parent::render($request, $e);
     }
 }

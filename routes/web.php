@@ -15,6 +15,17 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+$app->post('/auth/login', [
+	'uses' => 'AuthController@postLogin'
+]);
+
+$app->put('/auth/refresh', 'AuthController@refresh');
+
+$app->get('/', [
+	'middleware' => 'jwt-auth',
+	'uses' => 'UsersController@teste'
+]);
+
 $app->get('/v1/orders/load', [
 	'middleware' => 'jwt-auth',
 	'uses' => 'OrdersController@loadOrdersByPeriod'
