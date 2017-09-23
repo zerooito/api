@@ -21,37 +21,49 @@ $app->post('/auth/login', [
 
 $app->put('/auth/refresh', 'AuthController@refresh');
 
-$app->get('/', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'UsersController@teste'
-]);
+$app->group(['prefix' => '/v1'], function() use ($app) {
 
-$app->get('/v1/orders/load', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'OrdersController@loadOrdersByPeriod'
-]);
+	$app->group(['prefix' => '/orders'], function() use ($app) {
+		$app->get('/load', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@loadOrdersByPeriod'
+		]);
 
-$app->get('/v1/orders/total', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'OrdersController@getTotalOrders'
-]);
+		$app->get('/total', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@getTotalOrders'
+		]);
+	});
 
-$app->get('/v1/clients/last', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'ClientsController@getLastClientsRegisters'
-]);
+	$app->group(['prefix' => '/clients'], function() use ($app) {			
+		$app->get('/last', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ClientsController@getLastClientsRegisters'
+		]);
 
-$app->get('/v1/clients/count', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'ClientsController@getTotalCountClients'
-]);
+		$app->get('/count', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ClientsController@getTotalCountClients'
+		]);
+	});
 
-$app->get('/v1/products/count', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'ProductsController@getCountRegistersProducts'
-]);
+	$app->group(['prefix' => '/products'], function() use ($app) {
+		$app->get('/count', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@getCountRegistersProducts'
+		]);
 
-$app->get('/v1/products/cust', [
-	'middleware' => 'jwt-auth',
-	'uses' => 'ProductsController@getCustTotalProducts'
-]);
+		$app->get('/cust', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@getCustTotalProducts'
+		]);
+	});
+
+	$app->group(['prefix' => '/users'], function() use ($app) {
+		$app->get('/modules', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ModulesController@getModulesActives'
+		]);
+	});
+
+});
