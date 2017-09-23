@@ -9,7 +9,9 @@
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2",
         "tymon/jwt-auth": "1.0.0-beta.3",
-        "vluzrmos/lumen-cors": "2.1.*"
+        "vluzrmos/lumen-cors": "2.1.*",
+        "darkaonline/swagger-lume": "~2.0",
+        "zircote/swagger-php": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

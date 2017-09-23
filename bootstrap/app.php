@@ -23,6 +23,8 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+$app->configure('swagger-lume');
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -81,6 +83,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
