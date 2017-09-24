@@ -9,7 +9,7 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     public function createApplication()
     {
-        return require __DIR__. '/../bootstrap/app.php';
+        return require __DIR__ . '/../bootstrap/app.php';
     }
 
     /**
@@ -20,12 +20,21 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
     protected function headers($user = null)
     {
         $headers = ['Accept' => 'application/json'];
-
+        
         if (!is_null($user)) {
-            $headers['Authorization'] = 'Bearer ' . $user->token;
+            $headers['Authorization'] = 'Bearer ' . $user->access_token;
         }
 
         return $headers;
+    }
+
+    protected function generateUserTest()
+    {
+        $user = factory(App\User::class)->create(['password' => app('hash')->make('123456')]);
+
+        $response = $this->post('/auth/login', ['email' => $user->email, 'password' => '123456']);
+
+        return $response;
     }
     
 }

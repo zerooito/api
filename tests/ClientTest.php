@@ -10,9 +10,19 @@ class ClientTest extends TestCase
 	{
 	    $url = '/v1/clients/lastss';
 
-	    // Test unauthenticated access.
 	    $this->get($url, $this->headers())
 	         ->assertResponseStatus(404);
+	}
+
+	public function testClientLastNoContent()
+	{
+		$url = '/v1/clients/last';
+		
+		$user = $this->generateUserTest();
+
+		$headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+		
+		$this->get($url, $headers)->assertResponseStatus(204);
 	}
 
 }
