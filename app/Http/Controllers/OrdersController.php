@@ -20,7 +20,7 @@ class OrdersController extends Controller
     	
         $ordersTotalValue = Orders::getCountValorOrders($user->id);
 
-        return Response(['total' => $ordersTotalValue], 200);
+        return response()->json(['total' => $ordersTotalValue], 200);
     }
 
     public function loadOrdersByPeriod(Request $request, JWTAuth $JWTAuth)
@@ -29,7 +29,7 @@ class OrdersController extends Controller
 
     	$ordersPeriod = Orders::getLoadOrderByPeriod($user->id);
 
-    	return Response(Format::toChartDashboard($ordersPeriod), 200);
+        return response()->json(Format::toChartDashboard($ordersPeriod), 200);
     }
     
 }
