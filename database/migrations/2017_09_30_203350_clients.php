@@ -25,7 +25,7 @@ class Clients extends Migration
             $table->string('senha')->nullable();
             $table->tinyInteger('ativo')->nullable();
 
-            $table->string('id_usuario')->unsigned();
+            $table->integer('id_usuario')->unsigned();
             $table->foreign('id_usuario')->references('id')->on('usuarios');
 
             $table->timestamps();
