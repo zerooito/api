@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1506810277">
+  <project timestamp="1506810277">
+    <package name="App">
+      <file name="/opt/lampp/htdocs/winners/api/app/Clients.php">
+        <class name="Clients" namespace="App">
+          <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="7" elements="15" coveredelements="8"/>
+        </class>
+        <line num="28" type="method" name="getLastClientesRegisters" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="2"/>
+        <line num="35" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="42" type="stmt" count="2"/>
+        <line num="45" type="method" name="getTotalCountRegisters" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <metrics loc="59" ncloc="49" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="7" elements="15" coveredelements="8"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Modules.php">
+        <class name="Modules" namespace="App">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="getModulesByUser" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="28" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Orders.php">
+        <class name="Orders" namespace="App">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="27" type="method" name="getCountValorOrders" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="34" type="method" name="getLoadOrderByPeriod" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <metrics loc="48" ncloc="38" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Products.php">
+        <class name="Products" namespace="App">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+        </class>
+        <line num="27" type="method" name="getCountRegistersProducts" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="36" type="method" name="getCustTotalProducts" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="45" ncloc="35" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/User.php">
+        <class name="User" namespace="App">
+          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+        </class>
+        <line num="37" type="method" name="getJWTIdentifier" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="42" type="method" name="getJWTCustomClaims" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="47" type="method" name="updateTokenByEmail" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <metrics loc="51" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="App\Console">
+      <file name="/opt/lampp/htdocs/winners/api/app/Console/Kernel.php">
+        <class name="Kernel" namespace="App\Console">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="25" type="method" name="schedule" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Events">
+      <file name="/opt/lampp/htdocs/winners/api/app/Events/Event.php">
+        <class name="Event" namespace="App\Events">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Events/ExampleEvent.php">
+        <class name="ExampleEvent" namespace="App\Events">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <metrics loc="16" ncloc="9" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Exceptions">
+      <file name="/opt/lampp/htdocs/winners/api/app/Exceptions/Handler.php">
+        <class name="Handler" namespace="App\Exceptions">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+        </class>
+        <line num="34" type="method" name="report" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="46" type="method" name="render" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <metrics loc="50" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+      </file>
+    </package>
+    <package name="App\Helpers">
+      <file name="/opt/lampp/htdocs/winners/api/app/Helpers/Format.php">
+        <class name="Format" namespace="App\Helpers">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="8" type="method" name="toChartDashboard" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="10" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Http\Controllers">
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/AuthController.php">
+        <class name="AuthController" namespace="App\Http\Controllers">
+          <metrics complexity="6" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="13" elements="20" coveredelements="14"/>
+        </class>
+        <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="18" type="stmt" count="3"/>
+        <line num="19" type="stmt" count="3"/>
+        <line num="21" type="method" name="postLogin" visibility="public" complexity="5" crap="5.76" count="3"/>
+        <line num="23" type="stmt" count="3"/>
+        <line num="24" type="stmt" count="3"/>
+        <line num="25" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="29" type="stmt" count="3"/>
+        <line num="30" type="stmt" count="3"/>
+        <line num="31" type="stmt" count="3"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <metrics loc="46" ncloc="43" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="13" elements="20" coveredelements="14"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/ClientsController.php">
+        <class name="ClientsController" namespace="App\Http\Controllers">
+          <metrics complexity="5" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="25" elements="33" coveredelements="27"/>
+        </class>
+        <line num="15" type="method" name="getLastClientsRegisters" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="17" type="stmt" count="2"/>
+        <line num="19" type="stmt" count="2"/>
+        <line num="21" type="stmt" count="2"/>
+        <line num="22" type="stmt" count="2"/>
+        <line num="24" type="stmt" count="2"/>
+        <line num="26" type="stmt" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="32" type="method" name="getTotalCountClients" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="43" type="method" name="registerClient" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="49" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="62" type="stmt" count="1"/>
+        <line num="64" type="stmt" count="1"/>
+        <line num="65" type="stmt" count="1"/>
+        <line num="67" type="stmt" count="1"/>
+        <metrics loc="71" ncloc="71" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="25" elements="33" coveredelements="27"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/Controller.php">
+        <class name="Controller" namespace="App\Http\Controllers">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/ModulesController.php">
+        <class name="ModulesController" namespace="App\Http\Controllers">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="getModulesActives" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <metrics loc="23" ncloc="23" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/OrdersController.php">
+        <class name="OrdersController" namespace="App\Http\Controllers">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="getTotalOrders" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="26" type="method" name="loadOrdersByPeriod" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <metrics loc="34" ncloc="34" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/ProductsController.php">
+        <class name="ProductsController" namespace="App\Http\Controllers">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="getCountRegistersProducts" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="24" type="method" name="getCustTotalProducts" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <metrics loc="41" ncloc="41" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Controllers/UsersController.php">
+        <class name="UsersController" namespace="App\Http\Controllers">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="12" type="method" name="teste" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <metrics loc="18" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Http\Middleware">
+      <file name="/opt/lampp/htdocs/winners/api/app/Http/Middleware/Authenticate.php">
+        <class name="Authenticate" namespace="App\Http\Middleware">
+          <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="36" type="method" name="handle" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="44" ncloc="25" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Jobs">
+      <file name="/opt/lampp/htdocs/winners/api/app/Jobs/ExampleJob.php">
+        <class name="ExampleJob" namespace="App\Jobs">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+        </class>
+        <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="22" type="method" name="handle" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <metrics loc="26" ncloc="12" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Jobs/Job.php">
+        <class name="Job" namespace="App\Jobs">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="24" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Listeners">
+      <file name="/opt/lampp/htdocs/winners/api/app/Listeners/ExampleListener.php">
+        <class name="ExampleListener" namespace="App\Listeners">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="27" type="method" name="handle" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <metrics loc="31" ncloc="16" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Providers">
+      <file name="/opt/lampp/htdocs/winners/api/app/Providers/AppServiceProvider.php">
+        <class name="AppServiceProvider" namespace="App\Providers">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="register" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <metrics loc="18" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Providers/AuthServiceProvider.php">
+        <class name="AuthServiceProvider" namespace="App\Providers">
+          <metrics complexity="5" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="2" elements="6" coveredelements="3"/>
+        </class>
+        <line num="18" type="method" name="register" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="21" type="stmt" count="4"/>
+        <line num="35" type="method" name="anonymous function" complexity="2" crap="3.19" count="4"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <metrics loc="42" ncloc="22" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="3" elements="7" coveredelements="4"/>
+      </file>
+      <file name="/opt/lampp/htdocs/winners/api/app/Providers/EventServiceProvider.php">
+        <class name="EventServiceProvider" namespace="App\Providers">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="19" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <metrics files="24" loc="807" ncloc="627" classes="20" methods="35" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="54" elements="161" coveredelements="64"/>
+  </project>
+</coverage>
