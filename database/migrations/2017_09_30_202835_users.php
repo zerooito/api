@@ -21,7 +21,7 @@ class Users extends Migration
             $table->string('senha');
             $table->tinyInteger('ativo');
             $table->string('token');
-            $table->integer('estoque_minimo', 4)->nullable();
+            $table->integer('estoque_minimo')->nullable();
             $table->tinyInteger('sale_without_stock')->default(0);
             $table->string('loja')->nullable();
             $table->string('cep_origem')->nullable();
