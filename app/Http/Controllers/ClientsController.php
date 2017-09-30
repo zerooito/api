@@ -40,5 +40,32 @@ class ClientsController extends Controller
         );
     }
 
+    public function registerClient(Request $request, JWTAuth $JWTAuth)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+
+        $this->validate($request, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:clientes',
+            'password' => 'required'
+        ]);
+
+        $data = [
+            'nome1' => $request->input('firstname'),
+            'nome2' => $request->input('lastname'),
+            'email' => $request->input('email'),
+            'senha' => app('hash')->make($request->input('password')),
+            'id_usuario' => $user->id
+        ];
+
+        $response = Clients::create($data);
+
+        $request['id'] = $response->id;
+        $request['password'] = $response->senha;
+
+        return response()->json($request, 201);
+    }
+
 }
 

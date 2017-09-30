@@ -36,6 +36,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 	});
 
 	$app->group(['prefix' => '/clients'], function() use ($app) {			
+		$app->post('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ClientsController@registerClient'
+		]);
+
 		$app->get('/last', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ClientsController@getLastClientsRegisters'

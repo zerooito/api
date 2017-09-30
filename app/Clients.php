@@ -21,7 +21,8 @@ class Clients extends Model
      * @var array
      */
     protected $fillable = [
-        'nome1', 'nome2'
+        'nome1', 'nome2', 'email', 'senha',
+        'id_usuario'
     ];
 
     public static function getLastClientesRegisters($userId, $limit)
