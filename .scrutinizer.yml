@@ -2,6 +2,7 @@ build:
     tests:
         override:
             -
+                command: 'php artisan migrate'
                 command: './vendor/bin/phpunit tests --coverage-clover=log-coverage'
                 coverage:
                     file: 'log-coverage'
