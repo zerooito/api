@@ -24,6 +24,11 @@ $app->put('/auth/refresh', 'AuthController@refresh');
 $app->group(['prefix' => '/v1'], function() use ($app) {
 
 	$app->group(['prefix' => '/orders'], function() use ($app) {
+		$app->get('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@getOrders'
+		]);
+
 		$app->get('/load', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'OrdersController@loadOrdersByPeriod'

@@ -31,5 +31,30 @@ class OrdersController extends Controller
 
         return response()->json(Format::toChartDashboard($ordersPeriod), 200);
     }
+
+    public function getOrders(Request $request, JWTAuth $JWTAuth)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+        
+        $per_page = $request->input('per_page') ? $request->input('per_page') : 15;
+
+        if ($per_page > 100) {
+            return response()->json(['error' => 'Query parameter "per_page" not can major 100'], 500);
+        }
+
+        $response['total'] = Orders::getAllRegisterOrders($user->id);
+        $response['per_page'] = $per_page;
+        $response['current_page'] = $request->input('page') ? $request->input('page') : 1;
+        $response['last_page'] = round($response['total'] / $per_page);
+        $response['next_page_url'] = env('APP_URL') . 'v1/orders?page=' . ($request->input('page') > 1 ? $request->input('page') + 1: 2);
+        $response['prev_page_url'] = env('APP_URL') . 'v1/orders?page=' . ($request->input('page') > 1 ? $request->input('page') - 1: 1);
+        $response['from'] = $request->input('per_page') ? ($request->input('per_page') + 1) : 16;
+        $response['to'] = $request->input('per_page') ? ($request->input('per_page') * 2) : 30;
+        $response['data'] = Orders::getOrdersUserId(
+            $user->id, $request->input('per_page'), $request->input('page')
+        );
+
+        return response()->json($response, 200);
+    }
     
 }

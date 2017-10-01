@@ -9,10 +9,5 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
 
-    public function teste(Request $request)
-    {
-        return Response(['total' => 0], 200);
-    }
-
 }
 
