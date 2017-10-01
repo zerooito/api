@@ -21,7 +21,11 @@ build:
             - ~/.composer/cache/
     dependencies:
         before:
-            - mysql -uroot -e 'CREATE DATABASE scrutinizer'
+            - cp .env.travis .env
+            - mysql -e 'create database homestead_test;'
+            - composer self-update
+            - composer install --no-interaction
+            - php artisan migrate
     tests:
         before:
             - chmod -R 777 storage
