@@ -33,6 +33,7 @@ build:
             - vendor/bin/phpunit --coverage-clover=laravel-test-examples-coverage
         override:
             -
+                command: vendor/bin/phpunit --coverage-clover=laravel-test-examples-coverage
                 coverage:
                     file: laravel-test-examples-coverage
                     format: clover
