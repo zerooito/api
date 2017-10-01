@@ -4,7 +4,7 @@ build:
         php: '5.6'
         mysql: '5.7'
         hosts:
-            laravel.dev: '127.0.0.1'
+            winners.dev: '127.0.0.1'
         variables:
             APP_KEY: 'base64:OYl4Bk9ekouOUIRXyeTD0FVi+cJ9D+HMyDJBgSBSUuI='
             APP_ENV: 'testing'
