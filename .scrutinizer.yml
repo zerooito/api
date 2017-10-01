@@ -7,12 +7,13 @@ build:
             winners.dev: '127.0.0.1'
         variables:
             APP_KEY: 'base64:OYl4Bk9ekouOUIRXyeTD0FVi+cJ9D+HMyDJBgSBSUuI='
-            APP_ENV: 'local'
+            APP_ENV: 'testing'
             APP_URL: 'http://winners.dev'
             API_HOST: 'winners.dev'
             DB_HOST: '127.0.0.1'
-            DB_DATABASE: 'homestead_test'
+            DB_DATABASE: 'scrutinizer'
             DB_USERNAME: 'root'
+            JWT_SECRET: 'pCVqwM4xOVOfBdPI6oaeKwlMoCP6Ape6'
             DB_PASSWORD: ''
             MAIL_DRIVER: 'log'
     cache:
@@ -22,7 +23,7 @@ build:
     dependencies:
         before:
             - cp .env.travis .env
-            - mysql -e 'create database homestead_test;'
+            - mysql -uroot -e 'CREATE DATABASE scrutinizer'
             - composer self-update
             - composer install --no-interaction
             - php artisan migrate
