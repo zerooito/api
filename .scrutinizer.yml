@@ -7,11 +7,11 @@ build:
             winners.dev: '127.0.0.1'
         variables:
             APP_KEY: 'base64:OYl4Bk9ekouOUIRXyeTD0FVi+cJ9D+HMyDJBgSBSUuI='
-            APP_ENV: 'testing'
+            APP_ENV: 'local'
             APP_URL: 'http://winners.dev'
             API_HOST: 'winners.dev'
             DB_HOST: '127.0.0.1'
-            DB_DATABASE: 'scrutinizer'
+            DB_DATABASE: 'homestead_test'
             DB_USERNAME: 'root'
             DB_PASSWORD: ''
             MAIL_DRIVER: 'log'
