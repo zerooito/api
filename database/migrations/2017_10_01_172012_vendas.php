@@ -27,15 +27,14 @@ class Vendas extends Migration
             $table->boolean('ativo')->default(null);
             $table->boolean('orcamento')->default(null);
             $table->decimal('desconto', 10, 0);
-            $table->integer('cliente_id')->unsigned()->default(null);
             $table->string('asaas_boleto', 100)->default(null);
             $table->string('asaas_status', 40)->default(null);
             $table->string('asaas_transaction_id', 50)->default(null);
         
+            $table->integer('cliente_id')->nullable()->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
+
             $table->index('cliente_id', 'vendas_fk_cliente_id');
-        
-            $table->foreign('cliente_id')
-                ->references('id')->on('s');
         
             $table->timestamps();
         });
