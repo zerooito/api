@@ -23,10 +23,7 @@ class ClientsController extends Controller
         	$limit
         );
 
-        return Response(
-        	json_encode($lastClientesRegisters),
-        	empty($lastClientesRegisters) ? 204 : 200
-        );
+        return response()->json($lastClientesRegisters, empty($lastClientesRegisters) ? 204 : 200);
     }
 
     public function getTotalCountClients(Request $request, JWTAuth $JWTAuth)
@@ -35,9 +32,7 @@ class ClientsController extends Controller
         
         $countTotalClients = Clients::getTotalCountRegisters($user->id);
 
-        return Response(
-            json_encode($countTotalClients)
-        );
+        return response()->json($countTotalClients, 200);
     }
 
     public function registerClient(Request $request, JWTAuth $JWTAuth)
