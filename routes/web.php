@@ -19,14 +19,22 @@ $app->post('/auth/login', [
 	'uses' => 'AuthController@postLogin'
 ]);
 
-$app->put('/auth/refresh', 'AuthController@refresh');
+$app->put('/auth/refresh', [
+	'uses' => 'AuthController@refresh'
+]);
 
 $app->group(['prefix' => '/v1'], function() use ($app) {
 
 	$app->group(['prefix' => '/orders'], function() use ($app) {
+
+		$app->post('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@create'
+		]);
+
 		$app->get('/', [
 			'middleware' => 'jwt-auth',
-			'uses' => 'OrdersController@getOrders'
+			'uses' => 'OrdersController@get'
 		]);
 
 		$app->get('/load', [
@@ -38,9 +46,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'middleware' => 'jwt-auth',
 			'uses' => 'OrdersController@getTotalOrders'
 		]);
+			
 	});
 
 	$app->group(['prefix' => '/clients'], function() use ($app) {			
+
 		$app->post('/', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ClientsController@registerClient'
@@ -55,9 +65,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'middleware' => 'jwt-auth',
 			'uses' => 'ClientsController@getTotalCountClients'
 		]);
+
 	});
 
 	$app->group(['prefix' => '/products'], function() use ($app) {
+
 		$app->get('/count', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@getCountRegistersProducts'
@@ -67,13 +79,16 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@getCustTotalProducts'
 		]);
+
 	});
 
 	$app->group(['prefix' => '/users'], function() use ($app) {
+
 		$app->get('/modules', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ModulesController@getModulesActives'
 		]);
+
 	});
 
 });

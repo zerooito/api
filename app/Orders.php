@@ -56,6 +56,7 @@ class Orders extends Model
             FROM vendas a
             LEFT JOIN clientes b ON a.cliente_id = b.id
             WHERE a.id_usuario = ?
+            ORDER BY a.id DESC
             LIMIT ?, ?
         ";
 

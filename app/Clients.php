@@ -56,4 +56,21 @@ class Clients extends Model
         return $count[0];
     }
 
+    public function registerInfoByOrder($client, $userId)
+    {
+        $query = "INSERT INTO clientes (nome1, nome2, email) values (?, ?, ?)";
+        
+        $response = app('db')->insert($query, [
+            $client['firstname'], $client['lastname'], $client['email']
+        ]);
+
+        $clientId = app('db')->getPdo()->lastInsertId();
+        
+        Andresses::registerAddress('info', $userId, $client['payer_info'], $clientId);
+
+        Andresses::registerAddress('receiver', $userId, $client['receiver_info'], $clientId);
+
+        return $response;
+    }
+
 }

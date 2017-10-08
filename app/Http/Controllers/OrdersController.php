@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTAuth;
 
 use App\Orders;
+use App\Clients;
+use App\Products;
 
 use App\Helpers\Format;
 
@@ -32,7 +34,7 @@ class OrdersController extends Controller
         return response()->json(Format::toChartDashboard($ordersPeriod), 200);
     }
 
-    public function getOrders(Request $request, JWTAuth $JWTAuth)
+    public function get(Request $request, JWTAuth $JWTAuth)
     {
         $user = $JWTAuth->parseToken()->authenticate();
         
@@ -55,6 +57,20 @@ class OrdersController extends Controller
         );
 
         return response()->json($response, 200);
+    }
+
+    public function create(Request $request, JWTAuth $JWTAuth)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+        
+        $ClientsModel = new Clients;
+        $ProductsModel = new Products;
+        $OrderModel = new Orders;
+
+        if (!$ClientsModel->registerInfoByOrder($request->input('client'), $user->id))
+            return response()->json(['error' => 'An error ocurred when register client'], 403);
+
+        return response()->json([], 201);
     }
     
 }
