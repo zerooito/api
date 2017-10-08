@@ -13,7 +13,7 @@ class CreateTableAndresses extends Migration
      */
     public function up()
     {
-        Schema::create('andresses', function (Blueprint $table) {
+        Schema::create('endereco_cliente_cadastros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cep');
             $table->string('endereco');
@@ -44,6 +44,6 @@ class CreateTableAndresses extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('andresses');
+        Schema::dropIfExists('endereco_cliente_cadastros');
     }
 }

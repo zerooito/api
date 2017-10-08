@@ -58,10 +58,10 @@ class Clients extends Model
 
     public function registerInfoByOrder($client, $userId)
     {
-        $query = "INSERT INTO clientes (nome1, nome2, email) values (?, ?, ?)";
+        $query = "INSERT INTO clientes (nome1, nome2, email, id_usuario) values (?, ?, ?, ?)";
         
         $response = app('db')->insert($query, [
-            $client['firstname'], $client['lastname'], $client['email']
+            $client['firstname'], $client['lastname'], $client['email'], $userId
         ]);
 
         $clientId = app('db')->getPdo()->lastInsertId();
