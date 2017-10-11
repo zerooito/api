@@ -70,6 +70,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 
 	$app->group(['prefix' => '/products'], function() use ($app) {
 
+		$app->post('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@create'
+		]);
+
 		$app->get('/count', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@getCountRegistersProducts'

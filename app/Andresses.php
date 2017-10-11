@@ -30,22 +30,22 @@ class Andresses extends Model
         return [];
     }
 
-    public static function getAndressPayerByClientAndUserId()
+    public static function getAndressPayerByClientAndUserId($clientId, $userId, $type)
     {
-        return [];
+        return Andresses::where('id_cliente', $clientId)->where('id_usuario', $userId)->where('tipo', $type)->get()->toArray();
     }
 
-    public static function getAndressInfoByClientAndUserId()
+    public static function getAndressInfoByClientAndUserId($clientId, $userId, $type)
     {
-        return [];
+        return Andresses::where('id_cliente', $clientId)->where('id_usuario', $userId)->where('tipo', $type)->get()->toArray();
     }
 
-    public static function registerAddress($type = 'info', $userId, $data, $clientId)
+    public static function registerAddress($type = 'pagador', $userId, $data, $clientId)
     {
         $query = "
             INSERT INTO `endereco_cliente_cadastros` 
-            (cep, endereco, numero, bairro, cidade, uf, id_usuario, id_cliente, ativo) 
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (cep, endereco, numero, bairro, cidade, uf, id_usuario, id_cliente, ativo, tipo, created_at, updated_at) 
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ";
 
         return app('db')->insert($query, [
@@ -57,7 +57,10 @@ class Andresses extends Model
             $data['state'],
             $userId, 
             $clientId,
-            1
+            1,
+            $type,
+            date('Y-m-d H:i:s'),
+            date('Y-m-d H:i:s')
         ]);
     }
 

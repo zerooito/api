@@ -66,11 +66,11 @@ class Clients extends Model
 
         $clientId = app('db')->getPdo()->lastInsertId();
         
-        Andresses::registerAddress('info', $userId, $client['payer_info'], $clientId);
+        Andresses::registerAddress('pagador', $userId, $client['payer_info'], $clientId);
 
-        Andresses::registerAddress('receiver', $userId, $client['receiver_info'], $clientId);
+        Andresses::registerAddress('entrega', $userId, $client['receiver_info'], $clientId);
 
-        return $response;
+        return $clientId;
     }
 
 }

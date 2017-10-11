@@ -21,7 +21,9 @@ class Products extends Model
      * @var array
      */
     protected $fillable = [
+        'nome', 'preco',  'estoque', 'sku', 
         'custo', 'preco_venda', 'quantidade',
+        'id_usuario'
     ];
 
     public static function getCountRegistersProducts($userId)
@@ -40,6 +42,28 @@ class Products extends Model
         $cust = app('db')->select($query, [$userId]);
         
         return $cust[0];
+    }
+
+    public static function updateStock($sku, $userId, $action = 'decrease', $quantity, $log = '')
+    {
+        if ($action == 'decrease') {
+            $query = "
+                UPDATE produtos SET estoque = estoque - ? WHERE sku = ? AND id_usuario = ?
+            ";
+        }
+
+        if ($action == 'increase') {
+            $query = "
+                UPDATE produtos SET estoque = estoque + ? WHERE sku = ? AND id_usuario = ?
+            ";
+        }
+
+        return app('db')->update($query, [$quantity, $sku, $userId]);
+    }
+
+    public static function getItemBySKUAndUserId($sku, $userId)
+    {
+        return Products::where('sku', $sku)->where('id_usuario', $userId)->first()->toArray();
     }
 
 }

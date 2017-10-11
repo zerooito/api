@@ -37,5 +37,27 @@ class ProductsController extends Controller
         );	
     }
 
+    public function create(Request $request, JWTAuth $JWTAuth, Products $products)
+    {        
+        $user = $JWTAuth->parseToken()->authenticate();
+        
+        $this->validate($request, [
+            'name' => 'required',
+            'sku' => 'required',
+            'price' => 'required',
+            'stock' => 'required'
+        ]);
+
+        $data = [
+            'nome' => $request->input('name'),
+            'preco' => $request->input('price'),
+            'estoque' => $request->input('stock'),
+            'sku' => $request->input('sku'),
+            'id_usuario' => $user->id
+        ];
+
+        return response()->json($products->create($data), 201);
+    }
+
 }
 

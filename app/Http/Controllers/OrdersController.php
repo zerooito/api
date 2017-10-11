@@ -10,6 +10,8 @@ use Tymon\JWTAuth\JWTAuth;
 use App\Orders;
 use App\Clients;
 use App\Products;
+use App\Andresses;
+use App\ItemSales;
 
 use App\Helpers\Format;
 
@@ -67,10 +69,34 @@ class OrdersController extends Controller
         $ProductsModel = new Products;
         $OrderModel = new Orders;
 
-        if (!$ClientsModel->registerInfoByOrder($request->input('client'), $user->id))
+        $clientId = $ClientsModel->registerInfoByOrder($request->input('client'), $user->id);
+
+        if (!$clientId)
             return response()->json(['error' => 'An error ocurred when register client'], 403);
 
-        return response()->json([], 201);
+        $order = [
+            'valor' => $request->input('value'),
+            'custo' => $request->input('cust'),
+            'data_venda' => date('Y-m-d'),
+            'id_usuario' => $user->id,
+            'ativo' => 1,
+            'cliente_id' => $clientId,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        $orderId = $OrderModel->registerOrder($order);
+
+        if (!$orderId)
+            return response()->json(['error' => 'An error ocurred when create order'], 403);
+
+        $order = $OrderModel->getOrderToAPI($orderId);
+
+        $order['payer_info'] = Andresses::getAndressPayerByClientAndUserId($clientId, $user->id, 'pagador');
+        $order['receiver_info'] = Andresses::getAndressInfoByClientAndUserId($clientId, $user->id, 'entrega');
+        $order['products'] = ItemSales::saveItems($request->input('products'), $orderId, $user->id);
+
+        return response()->json($order, 201);
     }
     
 }

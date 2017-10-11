@@ -83,4 +83,20 @@ class Orders extends Model
         return $orders[0]->count;
     }
 
+    public function registerOrder($order)
+    {
+        Orders::insert($order);
+
+        return app('db')->getPdo()->lastInsertId();
+    }
+
+    public function getOrderToAPI($orderId)
+    {
+        return Orders::where('id', $orderId)->get([
+            'valor as value',
+            'custo as cust',
+            'id'
+        ])->toArray()[0];
+    }
+
 }

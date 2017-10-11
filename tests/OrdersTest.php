@@ -3,8 +3,12 @@
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
+use App\User;
+use App\Products;
+
 class OrdersTest extends TestCase
 {
+	protected $User;
 
 	public function testGetEmptyOrders()
 	{
@@ -49,8 +53,21 @@ class OrdersTest extends TestCase
 
 		$headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
 
-		$url = '/v1/orders';
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
 
+		$url = '/v1/products';
+		$data = [
+			'sku' => 'TESTE1',
+			'stock' => 10,
+			'price' => 2.50,
+			'name' => 'Produto de teste'
+		];
+		
+		$json = $this->post($url, $data, $headers);
+
+		$json->assertResponseStatus(201);
+
+		$url = '/v1/orders';
 		$data = [
 			'value' => 7.45,
 			'cust' => 3.00,
@@ -99,6 +116,10 @@ class OrdersTest extends TestCase
 		$json = $this->post($url, $data, $headers);
 
 		$json->assertResponseStatus(201);
+
+        $product = Products::getItemBySKUAndUserId('TESTE1', $this->User->id);
+
+		$this->assertEquals(8, $product['estoque']);
 	}
 
 }
