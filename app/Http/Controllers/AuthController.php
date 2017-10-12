@@ -26,8 +26,9 @@ class AuthController extends Controller
         ]);
 
         try {
-            if (!$token = $this->jwt->attempt($request->only('email', 'password')))
+            if (!$token = $this->jwt->attempt($request->only('email', 'password'))) {
                 return response()->json(['user_not_found'], 401);
+            }
         } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
             return response()->json(['token_expired'], 500);
         } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {

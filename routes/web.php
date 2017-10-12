@@ -37,6 +37,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'uses' => 'OrdersController@get'
 		]);
 
+		$app->patch('/{id}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@patch'
+		]);
+
 		$app->get('/load', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'OrdersController@loadOrdersByPeriod'

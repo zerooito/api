@@ -6,6 +6,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Products;
+use App\HistoryStock;
 
 class ItemSales extends Model
 {
@@ -38,6 +39,14 @@ class ItemSales extends Model
             app('db')->insert($query, [$product['id'], $orderId, $item['quantity']]);
 
             Products::updateStock($item['sku'], $userId, 'decrease', $item['quantity']);
+
+            HistoryStock::create([
+                'message' => 'Saled ' . $item['quantity'] . ' items on order #' . $orderId,
+                'produto_id' => $product['id'],
+                'usuario_id' => $userId,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
         }
     }
 

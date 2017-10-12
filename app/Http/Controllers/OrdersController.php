@@ -12,6 +12,7 @@ use App\Clients;
 use App\Products;
 use App\Andresses;
 use App\ItemSales;
+use App\Shipments;
 
 use App\Helpers\Format;
 
@@ -71,8 +72,9 @@ class OrdersController extends Controller
 
         $clientId = $ClientsModel->registerInfoByOrder($request->input('client'), $user->id);
 
-        if (!$clientId)
+        if (!$clientId) {
             return response()->json(['error' => 'An error ocurred when register client'], 403);
+        }
 
         $order = [
             'valor' => $request->input('value'),
@@ -87,8 +89,9 @@ class OrdersController extends Controller
 
         $orderId = $OrderModel->registerOrder($order);
 
-        if (!$orderId)
+        if (!$orderId) {
             return response()->json(['error' => 'An error ocurred when create order'], 403);
+        }
 
         $order = $OrderModel->getOrderToAPI($orderId);
 
@@ -98,5 +101,23 @@ class OrdersController extends Controller
 
         return response()->json($order, 201);
     }
-    
+
+    public function patch(Request $request, JWTAuth $JWTAuth, $id)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+
+        $data = $request->input('shipments');
+
+        $data['created_at'] = date('Y-m-d');
+        $data['updated_at'] = date('Y-m-d');
+        $data['order_id'] = $id;
+        $data['user_id'] = $user->id;
+
+        Shipments::updateShipmentIfExist($data);
+
+        unset($data['user_id']);
+
+        return response()->json($data, 200);
+    }
+
 }

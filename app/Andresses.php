@@ -32,12 +32,28 @@ class Andresses extends Model
 
     public static function getAndressPayerByClientAndUserId($clientId, $userId, $type)
     {
-        return Andresses::where('id_cliente', $clientId)->where('id_usuario', $userId)->where('tipo', $type)->get()->toArray();
+        return Andresses::where('id_cliente', $clientId)
+                        ->where('id_usuario', $userId)
+                        ->where('tipo', $type)
+                        ->get([
+                            'cep as zipcode', 'endereco as street', 'numero as number',
+                            'bairro as neighborhood', 'cidade as city', 'uf as state',
+                            'tipo as type'
+                        ])
+                        ->toArray();
     }
 
     public static function getAndressInfoByClientAndUserId($clientId, $userId, $type)
     {
-        return Andresses::where('id_cliente', $clientId)->where('id_usuario', $userId)->where('tipo', $type)->get()->toArray();
+        return Andresses::where('id_cliente', $clientId)
+                        ->where('id_usuario', $userId)
+                        ->where('tipo', $type)
+                        ->get([
+                            'cep as zipcode', 'endereco as street', 'numero as number',
+                            'bairro as neighborhood', 'cidade as city', 'uf as state',
+                            'tipo as type'
+                        ])
+                        ->toArray();
     }
 
     public static function registerAddress($type = 'pagador', $userId, $data, $clientId)
@@ -48,7 +64,7 @@ class Andresses extends Model
             values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ";
 
-        return app('db')->insert($query, [
+        app('db')->insert($query, [
             $data['zipcode'],
             $data['street'],
             $data['number'],
@@ -62,6 +78,19 @@ class Andresses extends Model
             date('Y-m-d H:i:s'),
             date('Y-m-d H:i:s')
         ]);
+
+        return [
+            'name' => $data['name'],
+            'street' => $data['street'],
+            'zipcode' => $data['zipcode'],
+            'number' => $data['number'],
+            'neighborhood' => $data['neighborhood'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'complement' => $data['complement'],
+            'reference' =>$data['reference'],
+            'country' => $data['country']
+        ];
     }
 
 }
