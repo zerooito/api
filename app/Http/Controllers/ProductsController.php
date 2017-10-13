@@ -40,7 +40,7 @@ class ProductsController extends Controller
     public function create(Request $request, JWTAuth $JWTAuth, Products $products)
     {        
         $user = $JWTAuth->parseToken()->authenticate();
-        
+
         $this->validate($request, [
             'name' => 'required',
             'sku' => 'required',

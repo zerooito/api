@@ -102,6 +102,12 @@ class OrdersController extends Controller
         return response()->json($order, 201);
     }
 
+    public function getById(Request $request, JWTAuth $JWTAuth, Clients $clients, 
+                            Products $products, Andresses $andresses, $id)
+    {
+        return response()->json([], 200);
+    }
+
     public function patch(Request $request, JWTAuth $JWTAuth, $id)
     {
         $user = $JWTAuth->parseToken()->authenticate();
