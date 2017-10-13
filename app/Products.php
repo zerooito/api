@@ -54,7 +54,7 @@ class Products extends Model
 
         if ($action == 'increase') {
             $query = "
-                UPDATE produtos SET estoque = estoque + ? WHERE sku = ? AND id_usuario = ?
+                UPDATE produtos SET estoque = estoque - ? WHERE sku = ? AND id_usuario = ?
             ";
         }
 
