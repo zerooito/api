@@ -102,10 +102,25 @@ class OrdersController extends Controller
         return response()->json($order, 201);
     }
 
-    public function getById(Request $request, JWTAuth $JWTAuth, Clients $clients, 
-                            Products $products, Andresses $andresses, $id)
+    public function getById(Request $request, JWTAuth $JWTAuth, Clients $clients, ItemSales $itemSales,
+                            Products $products, Andresses $andresses, Orders $orders, $id)
     {
-        return response()->json([], 200);
+        $user = $JWTAuth->parseToken()->authenticate();
+
+        $order = $orders->getOrderToAPI($id);   
+        $items = $itemSales->getItemsByOrderId($id);
+
+        $order['value'] = number_format($order['value'], 2);
+        $order['cust'] = number_format($order['cust'], 2);
+        $order['products'] = $products->loadProductsByItemSale($items);
+        $order['client'] = $clients->getInfoBasicClientById($order['client_id'])[0];
+        $order['client']['payer_info'] = Andresses::getAndressPayerByClientAndUserId($order['client_id'], $user->id, 'pagador')[0];
+        $order['client']['receiver_info'] = Andresses::getAndressPayerByClientAndUserId($order['client_id'], $user->id, 'entrega')[0];
+
+        unset($order['client_id']);
+        unset($order['id']);
+
+        return response()->json($order, 200);
     }
 
     public function patch(Request $request, JWTAuth $JWTAuth, $id)

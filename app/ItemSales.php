@@ -50,4 +50,9 @@ class ItemSales extends Model
         }
     }
 
+    public function getItemsByOrderId($orderId)
+    {
+        return ItemSales::where('venda_id', $orderId)->get()->toArray();
+    }
+
 }

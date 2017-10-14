@@ -73,4 +73,12 @@ class Clients extends Model
         return $clientId;
     }
 
+    public function getInfoBasicClientById($clientId)
+    {
+        return Clients::where('id', $clientId)
+                      ->get([
+                        'nome1 as firstname', 'nome2 as lastname', 'email'
+                      ])->toArray();
+    }
+
 }

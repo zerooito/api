@@ -8,6 +8,7 @@ use App\Products;
 
 class OrdersTest extends TestCase
 {
+
 	protected $User;
 
 	public function testGetEmptyOrders()
@@ -298,7 +299,39 @@ class OrdersTest extends TestCase
 		$json = $this->get($url, $headers);
 
 		$this->assertResponseStatus(200);
-		// $json->seeJson(['created_at' => date('Y-m-d')]);
+		$json->seeJsonContains([
+			'value' => "7.45",
+			'cust' => "3.00",
+			'products' => [
+				[
+					'sku' => 'TESTE1',
+					'quantity' => 2,
+					'unit_value' => "2.50",
+					'total' => "5.00"
+				]
+			],
+			'client' => [
+				'firstname' => 'Reginaldo',
+				'lastname' => 'Junior',
+				'email' => 'reginaldo@junior.com',
+				'payer_info' => [
+					'street' => 'Avenida do Contorno',
+					'zipcode' => '07252015',
+					'number' => '19',
+					'neighborhood' => 'Nova Cidade',
+					'city' => 'Guarulhos',
+					'state' => 'SP',
+				],
+				'receiver_info' => [
+					'street' => 'Avenida Franscisco Matarrazo',
+					'zipcode' => '05010000',
+					'number' => '175',
+					'neighborhood' => 'Perdizes',
+					'city' => 'São Paulo',
+					'state' => 'SP',
+				]
+			]
+		]);
 	}
 
 }
