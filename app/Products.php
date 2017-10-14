@@ -66,4 +66,25 @@ class Products extends Model
         return Products::where('sku', $sku)->where('id_usuario', $userId)->first()->toArray();
     }
 
+    public function loadProductsByItemSale($items)
+    {
+        $response = [];
+
+        foreach ($items as $item) {
+            $product = Products::where('id', $item['produto_id'])
+                                  ->get([
+                                    'sku', 'preco as unit_value'
+                                  ])->toArray();
+
+            $response[] = [
+                'sku' => $product[0]['sku'],
+                'quantity' => $item['quantidade'],
+                'unit_value' => number_format($product[0]['unit_value'], 2),
+                'total' => number_format($product[0]['unit_value'] * $item['quantidade'], 2)
+            ];
+        }
+
+        return $response;
+    }
+
 }

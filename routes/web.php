@@ -27,6 +27,16 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 
 	$app->group(['prefix' => '/orders'], function() use ($app) {
 
+		$app->get('/load', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@loadOrdersByPeriod'
+		]);
+
+		$app->get('/total', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@getTotalOrders'
+		]);
+
 		$app->post('/', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'OrdersController@create'
@@ -37,19 +47,14 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'uses' => 'OrdersController@get'
 		]);
 
+		$app->get('/{id}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'OrdersController@getById'
+		]);
+
 		$app->patch('/{id}', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'OrdersController@patch'
-		]);
-
-		$app->get('/load', [
-			'middleware' => 'jwt-auth',
-			'uses' => 'OrdersController@loadOrdersByPeriod'
-		]);
-
-		$app->get('/total', [
-			'middleware' => 'jwt-auth',
-			'uses' => 'OrdersController@getTotalOrders'
 		]);
 			
 	});

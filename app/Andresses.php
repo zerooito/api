@@ -37,8 +37,7 @@ class Andresses extends Model
                         ->where('tipo', $type)
                         ->get([
                             'cep as zipcode', 'endereco as street', 'numero as number',
-                            'bairro as neighborhood', 'cidade as city', 'uf as state',
-                            'tipo as type'
+                            'bairro as neighborhood', 'cidade as city', 'uf as state'
                         ])
                         ->toArray();
     }
@@ -50,8 +49,7 @@ class Andresses extends Model
                         ->where('tipo', $type)
                         ->get([
                             'cep as zipcode', 'endereco as street', 'numero as number',
-                            'bairro as neighborhood', 'cidade as city', 'uf as state',
-                            'tipo as type'
+                            'bairro as neighborhood', 'cidade as city', 'uf as state'
                         ])
                         ->toArray();
     }
