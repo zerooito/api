@@ -66,6 +66,11 @@ class Products extends Model
         return Products::where('sku', $sku)->where('id_usuario', $userId)->first()->toArray();
     }
 
+    public static function updateById($data, $id)
+    {
+        return Products::where('id', $id)->update($data);
+    }
+
     public function loadProductsByItemSale($items)
     {
         $response = [];
@@ -85,6 +90,41 @@ class Products extends Model
         }
 
         return $response;
+    }
+
+    public static function getAllRegisterProducts($userId)
+    {
+        $query = "
+            SELECT count(*) as count FROM produtos
+            WHERE id_usuario = ?
+        ";
+
+        $orders = app('db')->select($query, [$userId]);
+
+        return $orders[0]->count;
+    }
+
+    public static function getProductsUserId($userId, $limit=null, $offset=null)
+    {
+        $query = "
+            SELECT 
+                a.id, a.sku, a.nome as name, a.preco as price,
+                a.estoque as stock
+            FROM produtos a
+            WHERE a.id_usuario = ?
+            ORDER BY a.id DESC
+            LIMIT ?, ?
+        ";
+
+        $filter = [
+            $userId, !empty($offset) ? $offset : 0, !empty($limit) ? $limit : 15
+        ];
+        
+        $products = app('db')->select($query, $filter);
+
+        return array_map(function($products) {
+            return (array) $products;
+        }, $products);
     }
 
 }

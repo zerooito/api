@@ -80,9 +80,19 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 
 	$app->group(['prefix' => '/products'], function() use ($app) {
 
+		$app->get('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@get'
+		]);
+
 		$app->post('/', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@create'
+		]);
+
+		$app->patch('/{sku}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@patchBySku'
 		]);
 
 		$app->get('/count', [
@@ -93,6 +103,20 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 		$app->get('/cust', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@getCustTotalProducts'
+		]);
+
+		$app->get('/{sku}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@getProductBySku'
+		]);
+
+	});
+
+	$app->group(['prefix' => '/variations'], function() use ($app) {
+
+		$app->patch('/{sku}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'VariationsController@patchBySku'
 		]);
 
 	});
