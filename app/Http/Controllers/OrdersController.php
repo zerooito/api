@@ -56,7 +56,7 @@ class OrdersController extends Controller
         $response['from'] = $request->input('per_page') ? ($request->input('per_page') + 1) : 16;
         $response['to'] = $request->input('per_page') ? ($request->input('per_page') * 2) : 30;
         $response['data'] = Orders::getOrdersUserId(
-            $user->id, $request->input('per_page'), $request->input('page')
+            $user->id, $request->input('per_page'), $request->input('page') == 1 ? 0 : $request->input('page')
         );
 
         return response()->json($response, 200);

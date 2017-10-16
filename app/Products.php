@@ -115,11 +115,11 @@ class Products extends Model
             ORDER BY a.id DESC
             LIMIT ?, ?
         ";
-
+    
         $filter = [
             $userId, !empty($offset) ? $offset : 0, !empty($limit) ? $limit : 15
         ];
-        
+
         $products = app('db')->select($query, $filter);
 
         return array_map(function($products) {
