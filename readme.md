@@ -1,5 +1,3 @@
-<h1 align="center">ciawn/api</h1>
-<br>
 <p align="center">
   <img src="http://www.ciawn.com.br/images/logo.png" width="200" alt="Front-end Brasil">
 </p>
