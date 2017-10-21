@@ -1,6 +1,6 @@
 # API Auth
 
-About auth using core winners
+About auth using API winners
 
 ### /auth/login - [POST]
 

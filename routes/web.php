@@ -122,10 +122,9 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 	});
 
 	$app->group(['prefix' => '/users'], function() use ($app) {
-
-		$app->get('/modules', [
-			'middleware' => 'jwt-auth',
-			'uses' => 'ModulesController@getModulesActives'
+		
+		$app->post('/', [
+			'uses' => 'UsersController@create'
 		]);
 
 	});
