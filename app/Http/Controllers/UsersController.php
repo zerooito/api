@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Symfony\Component\HttpFoundation\Response;
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\JWTAuth;
 use App\User;
 
 class UsersController extends Controller
@@ -50,6 +51,22 @@ class UsersController extends Controller
 
         return response()->json($response, 201);
 	}
+
+    public function get(JWTAuth $JWTAuth, User $userModel)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+
+        $user = $userModel->where('id', $user->id)->first()->toArray();
+
+        $response = [
+            'name' => $user['nome'],
+            'email' => $user['email'],
+            'access_token' => $user['token'],
+            'phone' => $user['telefone']
+        ];
+
+        return response()->json($response, 200);
+    }
 
 }
 

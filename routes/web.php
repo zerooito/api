@@ -127,6 +127,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'uses' => 'UsersController@create'
 		]);
 
+		$app->get('/', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'UsersController@get'
+		]);
+
 	});
 
 });

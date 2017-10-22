@@ -55,4 +55,18 @@ class UserTest extends TestCase
     	$json->assertResponseStatus(200);
     	$json->seeJsonStructure(['access_token']);
 	}
+
+	public function testCaptureInfoUserByToken()
+	{
+		$user = $this->generateUserTest();
+
+		$this->headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$url = '/v1/users';
+    	$json = $this->get($url, $this->headers);
+
+    	$json->assertResponseStatus(200);
+    	$json->seeJsonStructure(['access_token', 'name', 'email', 'phone']);
+	}
+
 }

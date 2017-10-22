@@ -27,3 +27,23 @@ About endpoint users API Winners
     "phone": "11 12345678",
 }
 ```
+
+
+## Get User
+
+## Headers
+
+ - Content-Type: application/json
+ - Authorization: Bearer {token}
+
+### /v1/users - [GET]
+
+***Response***
+```
+{
+    "name": "Reginaldo Junior",
+    "email": "email@teste.com",
+    "phone": "11 12345678",
+    "access_token": "11 12345678",
+}
+```
