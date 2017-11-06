@@ -95,9 +95,11 @@ class ProductsModelTest extends TestCase
 
 	public function testGetProductNotExist()
 	{
-		$sku = 'NOTEXIST';
+		$user = $this->generateUserTest();
 
-		$this->createProduct($sku);
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$sku = 'NOTEXIST';
 
 		$products = new Products;
 
