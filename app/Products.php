@@ -127,4 +127,25 @@ class Products extends Model
         }, $products);
     }
 
+    public function getProductExistBySkuAndUserId($sku, $userId)
+    {
+        $query = "
+            SELECT 
+                a.sku
+            FROM produtos a
+            WHERE a.id_usuario = ? AND a.sku = ?
+            LIMIT 1
+        ";
+    
+        $filter = [
+            $userId, $sku
+        ];
+
+        $product = app('db')->select($query, $filter);
+
+        return array_map(function($product) {
+            return (array) $product;
+        }, $product);
+    }
+
 }

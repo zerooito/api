@@ -50,6 +50,12 @@ class ProductsController extends Controller
             'stock' => 'required'
         ]);
 
+        $register = $products->getProductExistBySkuAndUserId($request->input('sku'), $user->id);
+
+        if (!empty($register)) {
+            return response()->json(['error' => 'SKU is send already exist'], 400);
+        }
+
         $data = [
             'nome' => $request->input('name'),
             'preco' => $request->input('price'),

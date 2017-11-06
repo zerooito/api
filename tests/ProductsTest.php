@@ -45,7 +45,7 @@ class ProductsTest extends TestCase
 		$url = '/v1/products';
 
 		$data = [
-			'sku' => 'TESTE1',
+			'sku' => 'TESTEEDIT',
 			'name' => 'Produto teste',
 			'stock' => '10',
 			'price' => 9.99,
@@ -53,13 +53,13 @@ class ProductsTest extends TestCase
 				[
 					'name' => 'Produto Teste > M > Preto',
 					'price' => 9.99,
-					'sku' => 'TESTE1-M-PRETO',
+					'sku' => 'TESTEEDIT-M-PRETO',
 					'stock' => 8
 				],
 				[
 					'name' => 'Produto Teste > G > Preto',
 					'price' => 9.99,
-					'sku' => 'TESTE1-G-PRETO',
+					'sku' => 'TESTEEDIT-G-PRETO',
 					'stock' => 8
 				]
 			]
@@ -72,13 +72,13 @@ class ProductsTest extends TestCase
 				[
 					'name' => 'Produto Teste > M > Preto',
 					'price' => 9.99,
-					'sku' => 'TESTE1-M-PRETO',
+					'sku' => 'TESTEEDIT-M-PRETO',
 					'stock' => 8
 				],
 				[
 					'name' => 'Produto Teste > G > Preto',
 					'price' => 9.99,
-					'sku' => 'TESTE1-G-PRETO',
+					'sku' => 'TESTEEDIT-G-PRETO',
 					'stock' => 8
 				]
 			]
@@ -306,6 +306,31 @@ class ProductsTest extends TestCase
 			    ],
 			]
 		]);
+	}
+
+	public function testTryDuplicateSKU()
+	{
+		$user = $this->generateUserTest();
+
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$this->headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$url = '/v1/products';
+
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+		];
+
+		$jsonOne = $this->post($url, $data, $this->headers);
+		$jsonOne->assertResponseStatus(201);
+
+		$jsonTwo = $this->post($url, $data, $this->headers);
+		$jsonTwo->assertResponseStatus(400);
+		$jsonTwo->seeJsonContains(['error' => 'SKU is send already exist']);
 	}
 
 }

@@ -82,4 +82,26 @@ class ProductsModelTest extends TestCase
 		$this->assertEquals(11, $product['estoque']);
 	}
 
+	public function testGetProductExist()
+	{
+		$sku = uniqid();
+
+		$this->createProduct($sku);
+
+		$products = new Products;
+
+		$this->assertNotEmpty($products->getProductExistBySkuAndUserId($sku, $this->User->id));
+	}
+
+	public function testGetProductNotExist()
+	{
+		$sku = 'NOTEXIST';
+
+		$this->createProduct($sku);
+
+		$products = new Products;
+
+		$this->assertEmpty($products->getProductExistBySkuAndUserId($sku, $this->User->id));
+	}
+
 }
