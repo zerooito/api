@@ -46,16 +46,36 @@ class Products extends Model
 
     public static function updateStock($sku, $userId, $action = 'decrease', $quantity, $log = '')
     {
-        if ($action == 'decrease') {
-            $query = "
-                UPDATE produtos SET estoque = estoque - ? WHERE sku = ? AND id_usuario = ?
-            ";
+        $product = Products::where('sku', $sku)->where('id_usuario', $userId)->first();
+
+        if (!empty($product)) {
+            if ($action == 'decrease') {
+                $query = "
+                    UPDATE produtos SET estoque = estoque - ? WHERE sku = ? AND id_usuario = ?
+                ";
+            }
+
+            if ($action == 'increase') {
+                $query = "
+                    UPDATE produtos SET estoque = estoque + ? WHERE sku = ? AND id_usuario = ?
+                ";
+            }    
         }
 
-        if ($action == 'increase') {
-            $query = "
-                UPDATE produtos SET estoque = estoque + ? WHERE sku = ? AND id_usuario = ?
-            ";
+        $variation = Variations::getBySkuAndUserId($sku, $userId);
+
+        if (!empty($variation->toArray())) {
+            if ($action == 'decrease') {
+                $query = "
+                    UPDATE variations SET stock = stock - ? WHERE sku = ? AND user_id = ?
+                ";
+            }
+
+            if ($action == 'increase') {
+                $query = "
+                    UPDATE variations SET stock = stock + ? WHERE sku = ? AND user_id = ?
+                ";
+            }  
         }
 
         return app('db')->update($query, [$quantity, $sku, $userId]);
@@ -63,7 +83,19 @@ class Products extends Model
 
     public static function getItemBySKUAndUserId($sku, $userId)
     {
-        return Products::where('sku', $sku)->where('id_usuario', $userId)->first()->toArray();
+        $product = Products::where('sku', $sku)->where('id_usuario', $userId)->first();
+
+        if (!empty($product)) {
+            return $product->toArray();
+        }
+
+        $variation = Variations::getBySkuAndUserId($sku, $userId);
+
+        if (!empty($variation)) {
+            return $variation->toArray()[0];
+        }
+
+        return [];
     }
 
     public static function updateById($data, $id)

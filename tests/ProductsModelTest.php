@@ -24,10 +24,44 @@ class ProductsModelTest extends TestCase
 			'sku' => $sku,
 			'stock' => 10,
 			'price' => 2.50,
-			'name' => 'Produto de teste'
+			'name' => 'Produto de teste',
+			'variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto',
+					'price' => 9.99,
+					'sku' => $sku . '-TESTE1-M-PRETO',
+					'stock' => 10
+				]
+			]
 		];
 		
 		$json = $this->post($url, $data, $headers);
+	}
+
+	public function testUpdateStockDecreaseVariation()
+	{
+		$sku = uniqid();
+		
+		$this->createProduct($sku);
+
+		Products::updateStock($sku . '-TESTE1-M-PRETO', $this->User->id, 'decrease', 1);
+        
+        $product = Products::getItemBySKUAndUserId($sku . '-TESTE1-M-PRETO', $this->User->id);
+
+		$this->assertEquals(9, $product['stock']);
+	}
+
+	public function testUpdateStockIncreaseVariation()
+	{
+		$sku = uniqid();
+		
+		$this->createProduct($sku);
+
+		Products::updateStock($sku . '-TESTE1-M-PRETO', $this->User->id, 'increase', 1);
+        
+        $product = Products::getItemBySKUAndUserId($sku . '-TESTE1-M-PRETO', $this->User->id);
+
+		$this->assertEquals(11, $product['stock']);
 	}
 
 	public function testUpdateStockDecrease()

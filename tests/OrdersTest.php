@@ -124,6 +124,188 @@ class OrdersTest extends TestCase
 		$this->assertEquals(8, $product['estoque']);
 	}
 
+	public function testAddOrderProductWithVariation()
+	{
+		$user = $this->generateUserTest();
+
+		$headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$url = '/v1/products';
+
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+			'variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto',
+					'price' => 9.99,
+					'sku' => 'TESTE1-M-PRETO',
+					'stock' => 8
+				]
+			]
+		];
+
+		$json = $this->post($url, $data, $headers);
+
+		$json->assertResponseStatus(201);
+
+		$url = '/v1/orders';
+		$data = [
+			'value' => 9.99,
+			'cust' => 3.00,
+			'shipping' => 2.45,
+			'sub_value' => 9.99,
+			'status' => 'approved',
+			'products' => [
+				[
+					'sku' => 'TESTE1-M-PRETO',
+					'quantity' => 1,
+					'unit_value' => 9.99,
+					'total' => 9.99
+				]
+			],
+			'client' => [
+				'firstname' => 'Reginaldo',
+				'lastname' => 'Junior',
+				'document' => '123.444.342-24',
+				'email' => 'reginaldo@junior.com',
+				'payer_info' => [
+					'name' => 'Reginaldo Junior',
+					'street' => 'Avenida do Contorno',
+					'zipcode' => '07252015',
+					'number' => '19',
+					'neighborhood' => 'Nova Cidade',
+					'city' => 'Guarulhos',
+					'state' => 'SP',
+					'complement' => 'Viela',
+					'reference' => '',
+					'country' => 'Brazil'
+				],
+				'receiver_info' => [
+					'name' => 'Reginaldo Junior',
+					'street' => 'Avenida Franscisco Matarrazo',
+					'zipcode' => '05010000',
+					'number' => '175',
+					'neighborhood' => 'Perdizes',
+					'city' => 'São Paulo',
+					'state' => 'SP',
+					'complement' => 'Viela',
+					'reference' => '',
+					'country' => 'Brazil'
+				]
+			]
+		];
+
+		$json = $this->post($url, $data, $headers);
+
+        $product = Products::getItemBySKUAndUserId('TESTE1-M-PRETO', $this->User->id);
+
+		$this->assertEquals(7, $product['stock']);
+	}
+
+	public function testAddOrderProductAnyVariations()
+	{
+		$user = $this->generateUserTest();
+
+		$headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$url = '/v1/products';
+
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+			'variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto',
+					'price' => 9.99,
+					'sku' => 'TESTE1-M-PRETO',
+					'stock' => 8
+				],
+				[
+					'name' => 'Produto Teste > M > Preto',
+					'price' => 9.99,
+					'sku' => 'TESTE1-G-PRETO',
+					'stock' => 12
+				],
+			]
+		];
+
+		$json = $this->post($url, $data, $headers);
+
+		$json->assertResponseStatus(201);
+
+		$url = '/v1/orders';
+		$data = [
+			'value' => 9.99,
+			'cust' => 3.00,
+			'shipping' => 2.45,
+			'sub_value' => 9.99,
+			'status' => 'approved',
+			'products' => [
+				[
+					'sku' => 'TESTE1-G-PRETO',
+					'quantity' => 10,
+					'unit_value' => 9.99,
+					'total' => 9.99
+				],
+				[
+					'sku' => 'TESTE1-M-PRETO',
+					'quantity' => 2,
+					'unit_value' => 9.99,
+					'total' => 9.99
+				]
+			],
+			'client' => [
+				'firstname' => 'Reginaldo',
+				'lastname' => 'Junior',
+				'document' => '123.444.342-24',
+				'email' => 'reginaldo@junior.com',
+				'payer_info' => [
+					'name' => 'Reginaldo Junior',
+					'street' => 'Avenida do Contorno',
+					'zipcode' => '07252015',
+					'number' => '19',
+					'neighborhood' => 'Nova Cidade',
+					'city' => 'Guarulhos',
+					'state' => 'SP',
+					'complement' => 'Viela',
+					'reference' => '',
+					'country' => 'Brazil'
+				],
+				'receiver_info' => [
+					'name' => 'Reginaldo Junior',
+					'street' => 'Avenida Franscisco Matarrazo',
+					'zipcode' => '05010000',
+					'number' => '175',
+					'neighborhood' => 'Perdizes',
+					'city' => 'São Paulo',
+					'state' => 'SP',
+					'complement' => 'Viela',
+					'reference' => '',
+					'country' => 'Brazil'
+				]
+			]
+		];
+
+		$json = $this->post($url, $data, $headers);
+
+        $product = Products::getItemBySKUAndUserId('TESTE1-G-PRETO', $this->User->id);
+
+		$this->assertEquals(2, $product['stock']);
+
+        $product = Products::getItemBySKUAndUserId('TESTE1-M-PRETO', $this->User->id);
+
+		$this->assertEquals(6, $product['stock']);
+	}
+
 	public function testAddInfoShippingInvoiceOrder()
 	{
 		$user = $this->generateUserTest();
