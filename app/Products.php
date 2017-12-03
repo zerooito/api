@@ -173,7 +173,7 @@ class Products extends Model
                 }
             }
 
-            $products[$i]['variations'] = $variationProduct;
+            $products[$i]->variations = $variationProduct;
         }
 
         return array_map(function($products) {
