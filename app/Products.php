@@ -157,7 +157,7 @@ class Products extends Model
         foreach ($products as $i => $product) {
             $variations = new Variations;
                 
-            $variations = $variations->getVariationsByProductId($product['id']);
+            $variations = $variations->getVariationsByProductId($product->id);
 
             $variationProduct = [];
             if (!empty($variations)) {
