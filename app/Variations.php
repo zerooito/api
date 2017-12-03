@@ -68,4 +68,9 @@ class Variations extends Model
         return Variations::where('produto_id', $productId)->get();
     }
 
+    public static function deleteAllVariationsThisProductIdAndUserId($productId, $userId)
+    {
+        return Variations::where('produto_id', $productId)->where('user_id', $userId)->delete();
+    }
+
 }

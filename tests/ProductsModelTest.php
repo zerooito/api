@@ -140,4 +140,19 @@ class ProductsModelTest extends TestCase
 		$this->assertEmpty($products->getProductExistBySkuAndUserId($sku, $this->User->id));
 	}
 
+	public function testeRemoveProduct()
+	{
+		$sku = uniqid();
+
+		$this->createProduct($sku);
+
+		$products = new Products;
+
+		$this->assertNotEmpty($products->getProductExistBySkuAndUserId($sku, $this->User->id));
+
+		$products->deleteProductBySkuAndUserId($sku, $this->User->id);
+
+		$this->assertEmpty($products->getProductExistBySkuAndUserId($sku, $this->User->id));
+	}
+
 }

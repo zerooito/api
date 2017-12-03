@@ -105,6 +105,11 @@ $app->group(['prefix' => '/v1'], function() use ($app) {
 			'uses' => 'ProductsController@getCustTotalProducts'
 		]);
 
+		$app->delete('/{sku}', [
+			'middleware' => 'jwt-auth',
+			'uses' => 'ProductsController@deleteBySku'
+		]);
+		
 		$app->get('/{sku}', [
 			'middleware' => 'jwt-auth',
 			'uses' => 'ProductsController@getProductBySku'

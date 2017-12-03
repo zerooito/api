@@ -165,5 +165,26 @@ class ProductsController extends Controller
         return response()->json($response, 200);
     }
 
+    public function deleteBySku(Request $request, JWTAuth $JWTAuth, $sku)
+    {
+        $user = $JWTAuth->parseToken()->authenticate();
+
+        $product = Products::getItemBySKUAndUserId($sku, $user->id);
+
+        if (empty($product)) {
+            return response()->json(['error' => 'Product SKU not founde'], 400);
+        }
+
+        $products = new Products;
+
+        $deleted = $products->deleteProductBySkuAndUserId($sku, $user->id);
+        
+        if (!$deleted) {
+            return response()->json(['error' => 'Ocorred any error, try again or contant support'], 500);
+        }
+
+        return response()->json(['success' => 'Product removed with success'], 200);
+    }
+
 }
 

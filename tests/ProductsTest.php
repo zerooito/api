@@ -333,4 +333,29 @@ class ProductsTest extends TestCase
 		$jsonTwo->seeJsonContains(['error' => 'SKU is send already exist']);
 	}
 
+	public function testRemoveSku()
+	{
+		$user = $this->generateUserTest();
+
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$this->headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$url = '/v1/products';
+
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+		];
+
+		$jsonOne = $this->post($url, $data, $this->headers);
+		$jsonOne->assertResponseStatus(201);
+
+		$url = '/v1/products/TESTE1';
+		$jsonDelete = $this->delete($url, [], $this->headers);
+		$jsonDelete->assertResponseStatus(200);
+	}
+
 }
