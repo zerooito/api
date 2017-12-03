@@ -154,6 +154,28 @@ class Products extends Model
 
         $products = app('db')->select($query, $filter);
 
+        foreach ($products as $i => $product) {
+            $variations = new Variations;
+                
+            $variations = $variations->getVariationsByProductId($product['id']);
+
+            $variationProduct = [];
+            if (!empty($variations)) {
+                $variations = $variations->toArray();
+
+                foreach ($variations as $variation) {
+                    $variationProduct[] = [
+                        'name' => $variation['name'],
+                        'price' => $variation['price'],
+                        'sku' => $variation['sku'],
+                        'stock' => $variation['stock']
+                    ];
+                }
+            }
+
+            $products[$i]['variations'] = $variationProduct;
+        }
+
         return array_map(function($products) {
             return (array) $products;
         }, $products);
