@@ -24,4 +24,9 @@ class HistoryStock extends Model
         'message', 'produto_id', 'usuario_id'
     ];
 
+    public static function clearHistoryStockByProductIdAndUserId($productId, $userId)
+    {
+        return HistoryStock::where('produto_id', $productId)->where('usuario_id', $userId)->delete();
+    }
+
 }

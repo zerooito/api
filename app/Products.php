@@ -184,15 +184,20 @@ class Products extends Model
     {
         $productId = Products::where('sku', $sku)->where('id_usuario', $userId)->get(['id'])->toArray();
         
-        if (!empty($productId))
+        if (!empty($productId)) {
             Variations::deleteAllVariationsThisProductIdAndUserId($productId[0]['id'], $userId);
-        
-        $product = app('db')->table('produtos')
-                            ->where('id_usuario', $userId)
-                            ->where('sku', $sku)
-                            ->delete();
 
-        return $product;
+            HistoryStock::clearHistoryStockByProductIdAndUserId($productId[0]['id'], $userId);
+            
+            $product = app('db')->table('produtos')
+                                ->where('id_usuario', $userId)
+                                ->where('sku', $sku)
+                                ->delete();
+
+            return $product;
+        }
+
+        return false;
     }
 
 }
