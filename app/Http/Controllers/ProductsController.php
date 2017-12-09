@@ -101,6 +101,8 @@ class ProductsController extends Controller
             $variations->createVariations($request->input('variations'), $product['id'], $user->id);
 
             $product['variations'] = $request->input('variations');
+
+            $response = true;
         }
 
         if ($response) {

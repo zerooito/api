@@ -143,7 +143,7 @@ class OrdersTest extends TestCase
 				[
 					'name' => 'Produto Teste > M > Preto',
 					'price' => 9.99,
-					'sku' => 'TESTE1-M-PRETO',
+					'sku' => 'TESTE1-M-PRETO-ORDER-TEST',
 					'stock' => 8
 				]
 			]
@@ -162,7 +162,7 @@ class OrdersTest extends TestCase
 			'status' => 'approved',
 			'products' => [
 				[
-					'sku' => 'TESTE1-M-PRETO',
+					'sku' => 'TESTE1-M-PRETO-ORDER-TEST',
 					'quantity' => 1,
 					'unit_value' => 9.99,
 					'total' => 9.99
@@ -202,7 +202,7 @@ class OrdersTest extends TestCase
 
 		$json = $this->post($url, $data, $headers);
 
-        $product = Products::getItemBySKUAndUserId('TESTE1-M-PRETO', $this->User->id);
+        $product = Products::getItemBySKUAndUserId('TESTE1-M-PRETO-ORDER-TEST', $this->User->id);
 
 		$this->assertEquals(7, $product['stock']);
 	}
