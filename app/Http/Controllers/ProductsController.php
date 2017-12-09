@@ -95,11 +95,15 @@ class ProductsController extends Controller
             'id_usuario' => $user->id
         ];
 
-        $product = Products::updateById($data, $product['id']);
-        
-        if ($product) {
-            $product = Products::getItemBySKUAndUserId($sku, $user->id);
-            
+        $response = Products::updateById($data, $product['id']);
+
+        if (!empty($request->input('variations'))) {
+            $variations->createVariations($request->input('variations'), $product['id'], $user->id);
+
+            $product['variations'] = $request->input('variations');
+        }
+
+        if ($response) {
             return response()->json($product, 200);
         }
         

@@ -358,4 +358,80 @@ class ProductsTest extends TestCase
 		$jsonDelete->assertResponseStatus(200);
 	}
 
+	public function testEditProductSendAllBodyIncludeVariations()
+	{
+		$user = $this->generateUserTest();
+
+		$this->User = User::where('token', $user->response->original['access_token'])->first();
+
+		$this->headers['Authorization'] = 'Bearer ' . $user->response->original['access_token'];
+
+		$url = '/v1/products';
+
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+			'variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto',
+					'price' => 9.99,
+					'sku' => 'TESTE1-M-PRETO',
+					'stock' => 8
+				],
+				[
+					'name' => 'Produto Teste > G > Preto',
+					'price' => 9.99,
+					'sku' => 'TESTE1-G-PRETO',
+					'stock' => 8
+				]
+			]
+		];
+
+		$json = $this->post($url, $data, $this->headers);
+
+		$json->assertResponseStatus(201);
+
+		$url = '/v1/products/TESTE1';
+		$data = [
+			'sku' => 'TESTE1',
+			'name' => 'Produto teste',
+			'stock' => '10',
+			'price' => 9.99,
+			'variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto > Editado',
+					'price' => 9.99,
+					'sku' => 'TESTE1-M-PRETO',
+					'stock' => 8
+				],
+				[
+					'name' => 'Produto Teste > G > Preto > Editado',
+					'price' => 9.99,
+					'sku' => 'TESTE1-G-PRETO',
+					'stock' => 8
+				]
+			]
+		];
+
+		$json = $this->patch($url, $data, $this->headers);
+		$json->assertResponseStatus(200);
+		$json->seeJsonContains(['variations' => [
+				[
+					'name' => 'Produto Teste > M > Preto > Editado',
+					'price' => 9.99,
+					'sku' => 'TESTE1-M-PRETO',
+					'stock' => 8
+				],
+				[
+					'name' => 'Produto Teste > G > Preto > Editado',
+					'price' => 9.99,
+					'sku' => 'TESTE1-G-PRETO',
+					'stock' => 8
+				]
+			]
+		]);
+	}
+
 }

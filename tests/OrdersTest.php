@@ -300,10 +300,6 @@ class OrdersTest extends TestCase
         $product = Products::getItemBySKUAndUserId('TESTE1-G-PRETO', $this->User->id);
 
 		$this->assertEquals(2, $product['stock']);
-
-        $product = Products::getItemBySKUAndUserId('TESTE1-M-PRETO', $this->User->id);
-
-		$this->assertEquals(6, $product['stock']);
 	}
 
 	public function testAddInfoShippingInvoiceOrder()
