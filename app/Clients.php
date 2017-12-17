@@ -66,9 +66,13 @@ class Clients extends Model
 
         $clientId = app('db')->getPdo()->lastInsertId();
         
-        Andresses::registerAddress('pagador', $userId, $client['payer_info'], $clientId);
+        if (isset($client['payer_info'])) {
+            Andresses::registerAddress('pagador', $userId, $client['payer_info'], $clientId);
+        }
 
-        Andresses::registerAddress('entrega', $userId, $client['receiver_info'], $clientId);
+        if (isset($client['receiver_info'])) {
+            Andresses::registerAddress('entrega', $userId, $client['receiver_info'], $clientId);
+        }
 
         return $clientId;
     }

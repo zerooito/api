@@ -3,11 +3,13 @@
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use App\Andresses;
+use App\Clients;
 
 class AndressesModelTest extends TestCase
 {
 
 	protected $Andresses;
+	protected $Clients;
 
 	public function testGetAndressPayerByClientAndUserIdEmpty()
 	{
@@ -19,6 +21,7 @@ class AndressesModelTest extends TestCase
 	public function testRegisterNewAndressClient()
 	{
 		$this->Andresses = new Andresses;
+		$this->Clients = new Clients;
 
 		$user = $this->generateUserTest();
 
@@ -40,7 +43,15 @@ class AndressesModelTest extends TestCase
 		$userInfo = $this->get('/v1/users', $headers);
 		$userInfo = json_decode($userInfo->response->getContent());
 
-		$response = $this->Andresses->registerAddress('pagador', $userInfo->id, $data, 1);
+		$client = [
+			'firstname' => 'Reginaldo',
+			'lastname' => 'Junior',
+			'email' => 'afkldfjk@kaldjf.com'
+		];
+
+		$clientId = $this->Clients->registerInfoByOrder($client, $userInfo->id);
+
+		$response = $this->Andresses->registerAddress('pagador', $userInfo->id, $data, $clientId);
 
 		$this->assertEquals($data, $response);
 	}
