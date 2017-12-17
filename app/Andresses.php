@@ -59,7 +59,7 @@ class Andresses extends Model
         $query = "
             INSERT INTO `endereco_cliente_cadastros` 
             (cep, endereco, numero, bairro, cidade, uf, id_usuario, id_cliente, ativo, tipo, created_at, updated_at) 
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ";
 
         app('db')->insert($query, [
