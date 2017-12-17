@@ -59,6 +59,7 @@ class UsersController extends Controller
         $user = $userModel->where('id', $user->id)->first()->toArray();
 
         $response = [
+            'id' => $user['id'],
             'name' => $user['nome'],
             'email' => $user['email'],
             'access_token' => $user['token'],
